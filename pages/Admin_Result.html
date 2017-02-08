@@ -1,0 +1,235 @@
+    <!-- START BREADCRUMB -->
+    <ul class="breadcrumb push-down-0">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Report</a></li>
+    <li class="active">Student Result</li>
+    </ul>
+    <div class="content-frame">   
+
+    <!-- START CONTENT FRAME TOP -->
+
+    <div class="page-title" >            
+    <h2><span class="fa fa-smile-o"></span> Student Result</h2>
+    </div>                       
+
+
+    <div>
+    <div class="clearfix">
+
+    <br>
+
+    </div>
+
+    <div style="margin: 5%; width: 100%%">
+
+    <table BORDER="2" style="border-color: #1caf9a; width: 100%" ng-controller="Admin_resultController" >
+    <tr  style="background-color: #1caf9a; ">
+    <td >
+    <div class="col-sm-4"><h2 style="color: white">Student Result</h2>
+
+    </div>
+    <div class="col-sm-2" >
+    <select class="combobox form-control" id="Addstudent"  data-ng-model="Select_class.Class_Id" ng-options="obj.Class_Id as obj.Std for obj in classlist"  data-ng-change="getstudents()" >
+     <option value="" >Select a class</option></select><!-- Modal -->
+    </div>
+
+    
+
+    <div>
+     <button type="button"  class="btn btn-danger" data-toggle="modal" data-target="#myModal">Add Student Result </button>
+    </div>
+        
+        </td>
+      </tr>
+      <tr height=20%>
+
+        <TD>
+          <TABLE class="table table-bordered" style="margin:1% ; width:98% " data-ng-controller="Admin_resultController">
+           <thead>
+            <tr>
+              <th>S.No.</th>
+              <th>Class</th>
+              <th>Student Name</th>
+              <th>Term</th>
+              <th>English</th>
+              <th>G.K</th>
+              <th>Hindi</th>
+              <th>kannada</th>
+              <th>Maths</th>
+              <th>Moral Science</th>
+              <th>Science</th>
+              <th>Social Science</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="sr in Getstudent">
+              <td>
+                {{$index +1}}
+              </td>
+              <td>
+                {{sr.Std}}
+              </td>
+              <td>
+                {{sr.FName}}
+            
+              </td> 
+
+
+              <td>
+               <span ng-hide="false" ng-dblclick="editItem($event)">{{item.Term}}</span>
+                <input ng-show="false" ng-model="item.Term" ng-blur="doneEditing($event)" autofocus />
+              </td>
+              <td>
+                {{sr.English}}
+              </td>
+              <td>
+                {{sr.Hindi}}
+              </td>
+              <td>
+                {{sr.Maths}}
+              </td>
+              <td>
+                {{sr.Science}}
+              </td> 
+
+              <td>
+                {{sr.SocialScience}}
+              </td>
+              <td>
+                {{sr.kannada}}
+              </td>
+              <td>
+                {{sr.Moralscience}}
+              </td>
+              <td>
+                {{sr.GeneralKnowledge}}
+              </td>
+               <td>  
+                   <i class="fa fa-pencil-square-o"
+
+                   title="Edit"
+                   id="btnEditStudentfeeData" name="btnEditStudentfeeData"
+                   ng-click="editstudentfee(s)"
+                   data-role="button"
+                   data-toggle="modal"
+                   data-target="#editstudentResult"></i>
+                 </td>
+
+            </tr>
+          </tbody>
+        </TD>
+
+      </tr>
+    </table>
+    </div>
+    <div class="modal" id="editstudentResult" role="dialog" > 
+
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                  <h4 class="modal-title">Edit Student Fee</h4>
+                </div>
+
+                    <div class="modal-body">
+                        <!-- <div style="margin: 5%; width: 100%% ; padding-top: 130px" data-ng-repeat="s in Detail"> -->
+
+                                  <div class="form-group row"  >
+                                      <label  class="col-xs-2 col-form-label">Class Id</label>
+                                      <div class="col-xs-6">
+                                        <input name="TxtClass_Id" id="TxtClass_Id"  ng-model="Class_Id" class="form-control"  type="text"  >
+                                      </div>
+                                  </div>{{s.Student_Id}}
+
+                                  <div class="form-group row"  >
+                                      <label  class="col-xs-2 col-form-label">Student Id</label>
+                                      <div class="col-xs-6">
+                                        <input name="TxtStudent_Id" id="TxtStudent_Id"  ng-model="Student_Id" class="form-control"  type="text"  >
+                                      </div>
+                                  </div>{{s.Student_Id}}
+
+                                  <div class="form-group row"  >
+                                      <label for="example-url-input" class="col-xs-2 col-form-label">Student Name</label>
+                                      <div class="col-xs-6">
+                                        <input class="form-control" name="TxtStudent_Name" id="TxtStudent_Name"   ng-model="Student_Name" type="text"  readonly>
+                                      </div>{{Student_Name}}
+                                  </div>
+                                  
+                      <div class="form-group row" ng-controller="Admin_resultController" >
+                       <label class="col-xs-2 col-form-label">Subject</label >
+                       <div class="form-group row">
+                        <div class="col-sm-6">
+                          <select class="combobox form-control"  ng-model="Select_subject.Id"  id="subjectid" ng-options="obj.Id as obj.Subjects for obj in Subjectlist"  
+                          required="required">
+                          <option value=" " >Select a Class</option>
+
+                        </select>{{Select_subject.Id}}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row" ng-controller="Admin_resultController">
+                    <label for="example-url-input" class="col-xs-2 col-form-label">Term</label >
+                    <div class="form-group row">
+                      <div class="col-sm-6">
+                        <select class="combobox form-control"  ng-model="Select_term.Id"  id="termid" ng-options="obj.Id as obj.Term for obj in Termlist"  
+                        required="required">
+                        <option value=" " >Select a Term</option>
+
+                      </select>{{Select_term.Id}}
+                    </div>
+                  </div>
+                </div> 
+
+                <div class="form-group row" ng-controller="Admin_resultController">
+                  <label  for="example-url-input" class="col-xs-2 col-form-label">Grade</label>
+                  <div class="form-group row">
+                    <div class="col-sm-6"> 
+                      <select class="combobox form-control" id="resultbox"  data-ng-model="Select_grade.Id" ng-options="obj.Id as obj.Grade for obj in Gradelist"  required="required">
+                        <option value="">Select a Grade</option>
+
+                      </select>{{Select_grade.Id}}
+                      <!-- <input class="form-control" type="text"  id="classid" ng-model="select_class.Class_Id" /> -->
+
+                    </div>
+                  </div>
+                </div>
+                                  
+
+                                  <div class="form-group row" style="margin:13% ; padding-left: 123px" >
+                                      <button type="button" value="submit"  data-ng-click="Updatestudentfee()"  class="btn btn-info" >Submit</button>
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                 </div>
+                        <!-- </div> -->
+                    </div>
+                </div>
+        </div>
+    </div>
+        <!-- END CONTENT FRAME -->
+
+
+    </div>            
+    <!-- END PAGE CONTENT -->
+    </div>
+                         
+    <!-- END CONTENT FRAME -->
+
+
+    </div>            
+    <!-- END PAGE CONTENT -->
+    </div>
+    <!-- END BREADCRUMB -->                                                
+
+    <!-- START CONTENT FRAME -->
+
+    <!-- END CONTENT FRAME -->
+
+
+    </div>            
+    <!-- END PAGE CONTENT -->
+    </div>
+
+
